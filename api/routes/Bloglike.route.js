@@ -1,10 +1,19 @@
-import express from 'express'
-import { doLike, likeCount } from '../controllers/BlogLike.controller.js'
-import { authenticate } from '../middleware/authenticate.js'
+// ==============================
+// BlogLike.route.js
+// Blog like routes (some protected by authentication)
+// ==============================
 
-const BlogLikeRoute = express.Router()
-BlogLikeRoute.post('/do-like', authenticate, doLike)
-BlogLikeRoute.get('/get-like/:blogid/:userid', likeCount)
-BlogLikeRoute.get('/get-like/:blogid', likeCount)
+import express from 'express';
+import { doLike, likeCount } from '../controllers/BlogLike.controller.js';
+import { authenticate } from '../middleware/authenticate.js';
 
-export default BlogLikeRoute
+const BlogLikeRoute = express.Router();
+
+// -------------For authenticated Users-----------
+BlogLikeRoute.post('/do-like', authenticate, doLike); // Toggle like for a blog 
+
+// -------------For Public-----------
+BlogLikeRoute.get('/get-like/:blogid/:userid', likeCount); // Get like count and check if specific user liked
+BlogLikeRoute.get('/get-like/:blogid', likeCount); // Get like count only
+
+export default BlogLikeRoute;

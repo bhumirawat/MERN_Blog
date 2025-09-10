@@ -1,3 +1,9 @@
+// ==============================
+// Blog.route.js
+// Blog routes (CRUD, search, filtering, and user-specific blogs)
+// Protected routes require authentication
+// ==============================
+
 import express from "express";
 import {
   addBlog,
@@ -9,31 +15,25 @@ import {
   getRelatedBlog,
   getBlogByCategory,
   search,
-  getMyBlogs, 
+  getMyBlogs,
 } from "../controllers/Blog.controller.js";
 import upload from "../config/multer.js";
 import { authenticate } from "../middleware/authenticate.js";
-import { adminaccess } from "../middleware/adminaccess.js";
 
 const BlogRoute = express.Router();
 
-// Create
-BlogRoute.post("/add", authenticate, upload.single("file"), addBlog);
+// -------------For authenticated Users-----------
+BlogRoute.post("/add", authenticate, upload.single("file"), addBlog); // Add new blog with optional image upload
+BlogRoute.get("/edit/:blogid", authenticate, editBlog); // Fetch blog for editing
+BlogRoute.put("/update/:blogid", authenticate, upload.single("file"), updateBlog); // Update blog with optional image upload
+BlogRoute.delete("/delete/:blogid", authenticate, deleteBlog); // Delete blog by ID
+BlogRoute.get("/my-blogs", authenticate, getMyBlogs); // Get blogs created by logged-in user
 
-// Update/Edit/Delete
-BlogRoute.get("/edit/:blogid", authenticate, editBlog);
-BlogRoute.put("/update/:blogid", authenticate, upload.single("file"), updateBlog);
-BlogRoute.delete("/delete/:blogid", authenticate, deleteBlog);
-
-//User-specific blogs
-BlogRoute.get("/my-blogs", authenticate, getMyBlogs);
-
-
-// Public routes
-BlogRoute.get("/get-all", showAllBlog);
-BlogRoute.get("/get-blog/:slug", getBlog);
-BlogRoute.get("/get-related-blog/:category/:blog", getRelatedBlog);
-BlogRoute.get("/get-blog-by-category/:category", getBlogByCategory);
-BlogRoute.get("/search", search);
+// -------------For Public-----------
+BlogRoute.get("/get-all", showAllBlog); // Get all blogs
+BlogRoute.get("/get-blog/:slug", getBlog); // Get single blog by slug
+BlogRoute.get("/get-related-blog/:category/:blog", getRelatedBlog); // Get blogs from same category excluding current
+BlogRoute.get("/get-blog-by-category/:category", getBlogByCategory); // Get blogs filtered by category
+BlogRoute.get("/search", search); // Search blogs by title (query param: q)
 
 export default BlogRoute;
