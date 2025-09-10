@@ -54,8 +54,6 @@ const SearchBox = () => {
       <Input 
         name="q" 
         onInput={getInput}
-        // onFocus={() => setIsFocused(true)}
-        // onBlur={() => setIsFocused(false)}
         placeholder="Search blogs..." 
         className="h-10 pl-10 pr-4 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 focus:ring-2 focus:ring-violet-500 focus:border-transparent w-full"
         value={query}
