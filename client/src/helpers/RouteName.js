@@ -1,9 +1,13 @@
-export const RouteIndex = "/";
-export const RouteSignIn = "/sign-in";
-export const RouteSignUp = "/sign-up";
-export const RouteProfile = "/profile";
-export const RouteCategoryDetails = "/categories";
-export const RouteAddCategory = "/category/add";
+// ---------- Auth Routes ----------
+export const RouteIndex = "/";                  // Home Page
+export const RouteSignIn = "/sign-in";          // Sign-in Page
+export const RouteSignUp = "/sign-up";          // Sign-up Page
+export const RouteProfile = "/profile";         // User Profile
+
+
+// ---------- Category Routes ----------
+export const RouteCategoryDetails = "/categories";    // All categories
+export const RouteAddCategory = "/category/add";      // Add category
 export const RouteEditCategory = (category_id) => {
     if (category_id) {
         return `/category/edit/${category_id}`;
@@ -12,8 +16,10 @@ export const RouteEditCategory = (category_id) => {
     }
 }
 
-export const RouteBlog = "/blog-details";
-export const RouteAddBlog = "/blog/add";
+// ---------- Blog Routes ----------
+export const RouteBlog = "/blog-details";       // Blog details (base)
+export const RouteAddBlog = "/blog/add";        // Add blog
+
 export const RouteBlogEdit = (blogid) => {
     if (blogid){
         return `/blog/edit/${blogid}`
@@ -38,6 +44,7 @@ export const RouteBlogByCategory  = (category) => {
     }
 }
 
+// ---------- Search Route ----------
 export const RouteSearch  = (q) => {
     if(q){
         return `/search?q=${q}`
@@ -47,5 +54,6 @@ export const RouteSearch  = (q) => {
 }
 
 
-export const RouteCommentDetails = '/comments'
-export const RouteUser = '/users'
+// ---------- Other Routes ----------
+export const RouteCommentDetails = '/comments';   // Comments page
+export const RouteUser = '/users';                // Users page

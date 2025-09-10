@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-
 import { Input } from '@/components/ui/input'
 import React from 'react'
 import z from 'zod'
@@ -13,64 +12,73 @@ import { getEnv } from '@/helpers/getEnv'
 import { showToast } from '@/helpers/showToast'
 import GoogleLogin from '@/components/GoogleLogin'
 
-
 const SignUp = () => {
-
   const navigate = useNavigate()
 
+  // Form validation schema using Zod
   const formSchema = z.object({
-      name: z.string().min(3, "Name must be at least 3 characters long"),
-      email: z.string().email(),
-      password: z.string().min(8, "Password must be at least 8 characters long"),
-      confirmPassword: z.string().refine(data => data.password === data.confirmPassword, "Password and Confir Password should be same"),
-    })
-  
-    const form = useForm({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        name:'',
-        email:'',
-        password:'',
-        confirmPassword:'',
-      },
-    })
-  
-  
-    async function onSubmit(values) {
-      try {
-          const response = await fetch(`${getEnv('VITE_API_BASE_URL')}/auth/register`,{
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(values)
-          })
+    name: z.string().min(3, "Name must be at least 3 characters long"),
+    email: z.string().email(),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
+    confirmPassword: z.string().refine(
+      data => data.password === data.confirmPassword, 
+      "Password and Confirm Password should be same"
+    ),
+  })
 
-          const data = await response.json()
-          if(!response.ok) {
-            return showToast('error', data.message)
-          }
+  // Initialize form with react-hook-form and Zod validation
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  })
 
-          navigate(RouteSignIn)
-          showToast('success', data.message)
-          } catch (error) {
-              showToast('error', error.message)
-          }
+  // Handle form submission
+  async function onSubmit(values) {
+    try {
+      const response = await fetch(`${getEnv('VITE_API_BASE_URL')}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      })
+
+      const data = await response.json()
+
+      // Show error if response is not successful
+      if (!response.ok) {
+        return showToast('error', data.message)
+      }
+
+      // Navigate to login page on successful registration
+      navigate(RouteSignIn)
+      showToast('success', data.message)
+    } catch (error) {
+      showToast('error', error.message)
     }
+  }
 
   return (
     <div className='flex justify-center items-center h-screen w-screen'>
-    
-    <Card className='w-[400px] p-5'>
-      <h1 className='text-2xl font-bold mb-5 text-center'>Create Your Accounct</h1>
-      <div className=''>
-        <GoogleLogin/>
-        <div className='border my-5 flex justify-center items-center'>
-          <span className='absolute bg-white text-sm'>Or</span>
+      <Card className='w-[400px] p-5'>
+        <h1 className='text-2xl font-bold mb-5 text-center'>Create Your Account</h1>
+
+        {/* Google Login Button */}
+        <div>
+          <GoogleLogin />
+          <div className='border my-5 flex justify-center items-center'>
+            <span className='absolute bg-white text-sm'>Or</span>
+          </div>
         </div>
-      </div>
-        
+
+        {/* Signup Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} >
-            
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+
+            {/* Name Field */}
             <div className='mb-3'>
               <FormField
                 control={form.control}
@@ -79,8 +87,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your name"
-                      {...field} />
+                      <Input placeholder="Enter your name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -88,6 +95,7 @@ const SignUp = () => {
               />
             </div>
 
+            {/* Email Field */}
             <div className='mb-3'>
               <FormField
                 control={form.control}
@@ -96,8 +104,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your email address"
-                      {...field} />
+                      <Input placeholder="Enter your email address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -105,6 +112,7 @@ const SignUp = () => {
               />
             </div>
 
+            {/* Password Field */}
             <div className='mb-3'>
               <FormField
                 control={form.control}
@@ -113,8 +121,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Enter your password"
-                      {...field} />
+                      <Input type="password" placeholder="Enter your password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -122,6 +129,7 @@ const SignUp = () => {
               />
             </div>
 
+            {/* Confirm Password Field */}
             <div className='mb-3'>
               <FormField
                 control={form.control}
@@ -130,8 +138,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Again enter your password"
-                      {...field} />
+                      <Input type="password" placeholder="Again enter your password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -139,20 +146,21 @@ const SignUp = () => {
               />
             </div>
 
+            {/* Submit Button */}
             <div className='mt-5'>
               <Button type="submit" className="w-full">Sign Up</Button>
             </div>
 
+            {/* Redirect to Sign In */}
             <div className='mt-5 text-sm flex justify-center items-center gap-2'>
-              <p>Already have account? </p>
+              <p>Already have an account?</p>
               <Link className='text-blue-500 hover:underline' to={RouteSignIn}>Sign In</Link>
             </div>
 
           </form>
         </Form>
-    </Card>
-    
-    </div> 
+      </Card>
+    </div>
   )
 }
 
