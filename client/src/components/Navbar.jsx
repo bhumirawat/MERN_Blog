@@ -63,7 +63,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='flex justify-between items-center h-16 z-20 fixed w-full bg-white px-4 border-b top-0'>
+        <div className='flex justify-between items-center h-16 z-20 fixed w-full bg-white px-5 border-b top-0'>
             
             {/* Logo & Sidebar Toggle */}
             <div className='flex justify-center items-center gap-2'>
@@ -150,3 +150,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

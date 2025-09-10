@@ -9,11 +9,6 @@ html {
   overflow-y: scroll;
 }
 
-/* OR more specifically */
-/* body {
-  overflow-y: auto;
-} */
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -35,7 +30,7 @@ html {
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
-    --radius: 0.65rem;
+    --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -87,11 +82,11 @@ html {
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -99,133 +94,5 @@ html {
 
 
 body {
-  font-family: 'Nunito', sans-serif;
-}
-
-
-
-/* Editor - CSS*/
-.main-container {
-	font-family: var(--ck-content-font-family);
-	width: fit-content;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.editor-container_classic-editor .editor-container__editor {
-    width: 100%;
-    max-width: 795px;
-    box-sizing: border-box;
-}
-
-@media (max-width: 800px) {
-    .editor-container_classic-editor .editor-container__editor {
-        max-width: 100%; /* On smaller screens, shrink instead of overflowing */
-    }
-}
-
-
-.ck-content h3.category {
-	font-family: 'Oswald';
-	font-size: 20px;
-	font-weight: bold;
-	color: #555;
-	letter-spacing: 10px;
-	margin: 0;
-	padding: 0;
-}
-
-.ck-content h2.document-title {
-	font-family: 'Oswald';
-	font-size: 50px;
-	font-weight: bold;
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-.ck-content h3.document-subtitle {
-	font-family: 'Oswald';
-	font-size: 20px;
-	color: #555;
-	margin: 0 0 1em;
-	font-weight: bold;
-	padding: 0;
-}
-
-.ck-content p.info-box {
-	--background-size: 30px;
-	--background-color: #e91e63;
-	padding: 1.2em 2em;
-	border: 1px solid var(--background-color);
-	background:
-		linear-gradient(135deg, var(--background-color) 0%, var(--background-color) var(--background-size), transparent var(--background-size)),
-		linear-gradient(
-			135deg,
-			transparent calc(100% - var(--background-size)),
-			var(--background-color) calc(100% - var(--background-size)),
-			var(--background-color)
-		);
-	border-radius: 10px;
-	margin: 1.5em 2em;
-	box-shadow: 5px 5px 0 #ffe6ef;
-}
-
-.ck-content span.marker {
-	background: yellow;
-}
-
-.ck-content span.spoiler {
-	background: #000;
-	color: #000;
-}
-
-.ck-content span.spoiler:hover {
-	background: #000;
-	color: #fff;
-}
-
-.ck-content .button {
-	display: inline-block;
-	width: 260px;
-	border-radius: 8px;
-	margin: 0 auto;
-	padding: 12px;
-	color: #ffffff;
-	font-size: 24px;
-	font-weight: 700;
-	text-align: center;
-	text-decoration: none;
-}
-
-.ck-content .button--green {
-	background-color: #406b1e;
-}
-
-.ck-content .button--black {
-	background-color: #141517;
-}
-
-.editor_container__word-count .ck-word-count {
-	color: var(--ck-color-text);
-	display: flex;
-	height: 20px;
-	gap: var(--ck-spacing-small);
-	justify-content: flex-end;
-	font-size: var(--ck-font-size-base);
-	line-height: var(--ck-line-height-base);
-	font-family: var(--ck-font-face);
-	padding: var(--ck-spacing-small) var(--ck-spacing-standard);
-}
-
-.editor-container_include-word-count.editor-container_classic-editor .editor_container__word-count {
-	border: 1px solid var(--ck-color-base-border);
-	border-radius: var(--ck-border-radius);
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-	border-top: none;
-}
-
-.editor-container_include-word-count.editor-container_classic-editor .editor-container__editor .ck-editor .ck-editor__editable {
-	border-radius: 0;
+  font-family: "Nunito", serif;
 }

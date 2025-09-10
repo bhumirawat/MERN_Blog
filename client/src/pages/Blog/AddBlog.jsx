@@ -212,7 +212,7 @@ const AddBlog = () => {
                     <FormItem>
                       <FormLabel>Blog Content</FormLabel>
                       <FormControl>
-                        <div className="w-full">
+                        <div className="md:w-1000px">
                           <Editor
                             initialData={field.value}
                             onChange={(event, editor) => {
